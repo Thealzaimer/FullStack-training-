@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose')
 
-const Thing = require('D:/STG/go-fullstack/backend/models/thing.js');
+const Thing = require('./models/thing');
 
 mongoose.connect('mongodb+srv://MehdiC:MDXlpCno7ZGLMkHS@backend.drea6n1.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
