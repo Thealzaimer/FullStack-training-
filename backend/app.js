@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose')
 
+const userRoutes = require('./routes/user');
 const stuffRoutes = require('./routes/stuff');
 
 mongoose.connect('mongodb+srv://MehdiC:MDXlpCno7ZGLMkHS@backend.drea6n1.mongodb.net/?retryWrites=true&w=majority',
@@ -23,5 +24,6 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use('/api/stuff',stuffRoutes);
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
