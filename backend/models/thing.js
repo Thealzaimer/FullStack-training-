@@ -6,6 +6,7 @@ const thingSchema = mongoose.Schema({
   imageUrl: { type: String, required: true },
   userId: { type: String, required: true },
   price: { type: Number, required: true },
+  DateCreation: { type: Date, required: true},
 });
 
 
