@@ -1,4 +1,6 @@
 const Thing = require('../models/thing');
+// const fs = require('fs');
+// const path = require('path');
 
 exports.createThing = (req,res,next) =>{ 
     delete req.body._id;
