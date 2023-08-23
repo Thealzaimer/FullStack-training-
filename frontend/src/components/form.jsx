@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+// import { Textarea } from 'evergreen-ui'
 
 function Form() {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ function Form() {
     price: 0,
     DateCreation: '',
   });
-
   useEffect(() => {
     if (productToModify) {
       setFormData({
@@ -86,9 +86,10 @@ function Form() {
         <div>
           <label htmlFor="description">Description:</label>
           <br />
-          <textarea
+          <textarea 
             id="description"
             name="description"
+            placeholder='write a description'
             cols={50}
             rows={4}
             value={formData.description}
@@ -98,7 +99,7 @@ function Form() {
         <div>
           <label htmlFor="imageUrl">Image URL:</label>
           <input
-            type="text"
+            type="file"
             accept="image/*"
             id="imageUrl"
             name="imageUrl"
