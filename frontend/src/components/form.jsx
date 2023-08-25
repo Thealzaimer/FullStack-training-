@@ -99,7 +99,7 @@ function Form() {
         <div>
           <label htmlFor="imageUrl">Image URL:</label>
           <input
-            type="file"
+            type="text"
             accept="image/*"
             id="imageUrl"
             name="imageUrl"
