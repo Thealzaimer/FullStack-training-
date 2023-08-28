@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import { Textarea } from 'evergreen-ui'
-import "./form.css"
+import "./form.css";
 
 function Form() {
   const navigate = useNavigate();
@@ -11,20 +10,23 @@ function Form() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    imageUrl: null,
+    imageUrl: '',
     userId: '54654654',
     price: 0,
     DateCreation: '',
+    DateModification: '', 
   });
+
   useEffect(() => {
     if (productToModify) {
       setFormData({
         title: productToModify.title || '',
-        description: productToModify.description || null,
+        description: productToModify.description || '',
         imageUrl: productToModify.imageUrl || '',
-        userId: '54654654', 
+        userId: '54654654',
         price: productToModify.price || 0,
         DateCreation: productToModify.DateCreation || '',
+        DateModification: productToModify.DateModification || '',
       });
     }
   }, [productToModify]);
@@ -40,10 +42,17 @@ function Form() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const updatedformData = {
+      const updatedFormData = {
         ...formData,
-        DateCreation: new Date().toISOString(),
+        DateModification: new Date().toISOString(),
       };
+
+      if (productToModify) {
+        delete updatedFormData.DateCreation;
+      } else {
+        
+        updatedFormData.DateCreation = new Date().toISOString();
+      }
 
       if (productToModify) {
         await fetch(`http://localhost:4000/api/stuff/${productToModify._id}`, {
@@ -51,7 +60,7 @@ function Form() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(updatedformData),
+          body: JSON.stringify(updatedFormData),
         });
       } else {
         await fetch('http://localhost:4000/api/stuff', {
@@ -59,7 +68,7 @@ function Form() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(updatedformData),
+          body: JSON.stringify(updatedFormData),
         });
       }
 

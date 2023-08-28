@@ -7,11 +7,9 @@ const thingSchema = mongoose.Schema({
   userId: { type: String, required: true },
   price: { type: Number, required: true },
   DateCreation: { type: Date, required: true},
+  DateModification: { type: Date, required: true},
+
 });
-
-
-
-
 
 
 module.exports = mongoose.model('Thing', thingSchema);

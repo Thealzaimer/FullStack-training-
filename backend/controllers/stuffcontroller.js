@@ -11,10 +11,15 @@ exports.createThing = (req,res,next) =>{
       .catch(error => res.status(400).json({ error }));
     };
 exports.modifyOneThing = (req, res, next) => {
-    Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Object Updated !'}))
-        .catch(error => res.status(400).json({ error }));
-};
+        const modifiedThing = {
+          ...req.body,
+          DateModification: new Date().toISOString()
+        };
+      
+        Thing.updateOne({ _id: req.params.id }, modifiedThing)
+          .then(() => res.status(200).json({ message: 'Object Updated !' }))
+          .catch(error => res.status(400).json({ error }));
+    };   
 exports.deleteOnething = (req, res, next) => {
     Thing.deleteOne({ _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
