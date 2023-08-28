@@ -1,0 +1,14 @@
+h1{
+    text-align: center;
+    padding-top: 50px;
+}
+.title{
+    color: white;
+}
+body{
+    background-image: url(https://platinumlist.net/guide/wp-content/uploads/2023/03/8359_img_worlds_of_adventure-big1613913137.jpg-1024x683.webp);
+    background-repeat: no-repeat;
+    background-size:cover ;
+    overflow: 'hidden';
+
+}

@@ -1,29 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
-import Form from './components/form'; 
-import List from './components/list'; 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Homepage from './pages/Home';
+import Formpage from './pages/Form';
+import Listpage from './pages/List';
 
 function App() {
   return (
+    <div className="App">
     <Router>
-      <div className="App">
-        <h1>Main Page</h1>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/form">Form</Link>
-            </li>
-            <li>
-              <Link to="/list">List</Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path="/form" element={<Form />} />
-          <Route path="/list" element={<List />} />
-        </Routes>
-      </div>
+      
+      <Routes>
+        <Route path='/' element={<Homepage/>}></Route>
+        <Route path='/form' element={<Formpage/>}></Route>
+        <Route path='/list' element={<Listpage/>}></Route>
+      </Routes>
+
+
     </Router>
+    </div>
   );
 }
 

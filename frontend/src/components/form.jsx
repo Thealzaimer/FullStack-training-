@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 // import { Textarea } from 'evergreen-ui'
+import "./form.css"
 
 function Form() {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ function Form() {
   };
 
   return (
-    <div>
+    <div className='body'>
       <h2>{productToModify ? 'Modify Product' : 'Create New Product'}</h2>
       <form onSubmit={handleSubmit}>
         <div>

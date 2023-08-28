@@ -62,12 +62,12 @@ function List() {
   };
 
   return (
-    <div>
-      <h2>Product List</h2>
+    <div className='container'>
+      <h2 className='title1'>Product List</h2>
       <SearchBar searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
       <div>
         <label>
-          Price Filter:
+          <h2 className='price'>Price Filter:</h2>
           <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}>
             <option value="all">All</option>
             <option value="lessThan100">Less than $100</option>
@@ -78,7 +78,7 @@ function List() {
       </div>
       <ul>
         {searchResults.map((product) => (
-          <li key={product._id}>
+          <li key={product._id} className='list'>
             <strong className='title'>{product.title}</strong>
             <br /> {product.description}
             <br /> <img src={product.imageUrl} alt="" className='img' />
