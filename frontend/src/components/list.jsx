@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './searchbar';
+import ReactPaginate from 'react-paginate';
 import './list.css';
 
 function List() {
@@ -60,7 +61,9 @@ function List() {
     const productToModify = products.find((product) => product._id === productId);
     navigate('/form', { state: { productToModify } });
   };
-
+  function handlePageClick(e){
+    console.log(e)
+  }
   return (
     <div className='container'>
       <h2 className='title1'>Product List</h2>
@@ -90,6 +93,25 @@ function List() {
           </li>
         ))}
       </ul>
+      <ReactPaginate
+          breakLabel="..."
+          nextLabel="next"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={4}
+          pageCount={8}
+          previousLabel="previous"
+          renderOnZeroPageCount={null}
+          marginPagesDisplayed={1}
+            containerClassName="pagination justify-content-center"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            activeClassName="active"
+
+        />
     </div>
   );
 }
