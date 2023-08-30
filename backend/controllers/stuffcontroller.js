@@ -25,37 +25,16 @@ exports.deleteOnething = (req, res, next) => {
         .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
         .catch(error => res.status(400).json({ error }));
 };
-exports.getAll = (req, res, next) =>{
+exports.getAll = (req, res, next) => {
     Thing.find()
         .then(things => res.status(200).json(things))
-        .catch( error => res.status(400).json({ error }));
-        
+        .catch(error => res.status(400).json({ error }));
 };
+
 exports.getOne = (req, res, next) => {
     Thing.findOne({ _id: req.params.id })
         .then(thing => res.status(200).json(thing))
         .catch(error => res.status(404).json({ error }));
 }
-exports.getpage = (req, res, next) =>{
-    Thing.find({})
-    .then(thing => {
 
 
-     const page=req.query.page
-     const size=req.query.limit
-     const startPage=(page)
-     const lastPage=(startPage)+(size)
-    console.log('allthings',thing)
-     console.log('startpage',startPage)
-     console.log('lastpage',lastPage)
-    const result=thing.slice(startPage,lastPage)
-
-
-    res.status(200).json(result)
-    })
-    .catch( error => res.status(400).json({ error }));
-   
-    
-    
-    
-}

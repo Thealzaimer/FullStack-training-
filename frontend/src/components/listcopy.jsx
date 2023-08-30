@@ -11,36 +11,32 @@ function List() {
   const [searchResults, setSearchResults] = useState([]);
   const [priceFilter, setPriceFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+
+  const itemsPerPage = 5; 
 
   useEffect(() => {
-    async function fetchProducts(page) {
+    async function fetchProducts() {
       try {
-        const response = await axios.get(`http://localhost:4000/api/stuff?page=${page}`);
+        const response = await axios.get(`http://localhost:4000/api/stuff`);
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     }
 
-    fetchProducts(currentPage);
-  }, [currentPage]);
+    fetchProducts();
+  }, [currentPage]); 
 
   useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const paginatedProducts = products.slice(startIndex, endIndex);
-
-    let filteredProducts = paginatedProducts;
-
+    let filteredProducts = products;
     if (priceFilter === 'lessThan100') {
-      filteredProducts = paginatedProducts.filter((product) => product.price < 100);
+      filteredProducts = products.filter((product) => product.price < 100);
     } else if (priceFilter === '100To500') {
-      filteredProducts = paginatedProducts.filter(
+      filteredProducts = products.filter(
         (product) => product.price >= 100 && product.price <= 500
       );
     } else if (priceFilter === 'moreThan500') {
-      filteredProducts = paginatedProducts.filter((product) => product.price > 500);
+      filteredProducts = products.filter((product) => product.price > 500);
     }
 
     const searchFilteredProducts = filteredProducts.filter(
@@ -50,7 +46,7 @@ function List() {
     );
 
     setSearchResults(searchFilteredProducts);
-  }, [searchTerm, products, priceFilter, currentPage]);
+  }, [searchTerm, products, priceFilter]);
 
   const handleDelete = async (productId) => {
     try {
@@ -66,9 +62,13 @@ function List() {
     const productToModify = products.find((product) => product._id === productId);
     navigate('/form', { state: { productToModify } });
   };
+  console.log('products: ',products)
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-
+  console.log('products.length: ',products.length)
+  console.log('itemsPerPage: ', itemsPerPage)
+  console.log('products.length /itemsPerPage: ',products.length /itemsPerPage)
+  console.log('Math.ceil( products.length /itemsPerPage): ',Math.ceil( products.length /itemsPerPage))
+  
   return (
     <div className='container'>
       <h2 className='title1'>Product List</h2>
@@ -99,21 +99,15 @@ function List() {
         ))}
       </ul>
       <div className="pagination">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage(currentPage - 1)}
-        >
-          Previous
-        </button>
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() => setCurrentPage(currentPage + 1)}
-        >
-          Next
-        </button>
+        {Array.from({ length: Math.ceil( products.length /itemsPerPage) }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index + 1)}
+            className={currentPage === index + 1 ? "active" : ""}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
