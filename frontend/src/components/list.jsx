@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './searchbar';
 import './list.css';
+import { compareAsc, parseISO } from 'date-fns'; // Import date-fns functions for date comparison
 
 function List() {
   const navigate = useNavigate();
@@ -69,6 +70,36 @@ function List() {
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
+  const [sortCriteria, setSortCriteria] = useState('creationDate'); 
+  const [sortAscending, setSortAscending] = useState(true); 
+
+  const handleSortChange = (newSortCriteria) => {
+    if (newSortCriteria === sortCriteria) {
+      setSortAscending(!sortAscending);
+    } else {
+      setSortCriteria(newSortCriteria);
+      setSortAscending(true);
+    }
+  };
+
+  const compareProducts = (product1, product2) => {
+    if (sortCriteria === 'creationDate') {
+      const date1 = parseISO(product1.DateCreation);
+      const date2 = parseISO(product2.DateCreation);
+      return sortAscending ? compareAsc(date1, date2) : compareAsc(date2, date1);
+    } else if (sortCriteria === 'modificationDate') {
+      const date1 = parseISO(product1.DateModification);
+      const date2 = parseISO(product2.DateModification);
+      return sortAscending ? compareAsc(date1, date2) : compareAsc(date2, date1);
+    } else if (sortCriteria === 'title') {
+      return sortAscending
+        ? product1.title.localeCompare(product2.title)
+        : product2.title.localeCompare(product1.title);
+    }
+  };
+
+  const sortedSearchResults = searchResults.slice().sort(compareProducts);
+
   return (
     <div className='container'>
       <h2 className='title1'>Product List</h2>
@@ -84,8 +115,29 @@ function List() {
           </select>
         </label>
       </div>
+      <div>
+        <h2 className="sort-header">Sort By:</h2>
+        <button
+          className={`sort-button ${sortCriteria === 'creationDate' && 'active'}`}
+          onClick={() => handleSortChange('creationDate')}
+        >
+          Creation Date
+        </button>
+        <button
+          className={`sort-button ${sortCriteria === 'modificationDate' && 'active'}`}
+          onClick={() => handleSortChange('modificationDate')}
+        >
+          Modification Date
+        </button>
+        <button
+          className={`sort-button ${sortCriteria === 'title' && 'active'}`}
+          onClick={() => handleSortChange('title')}
+        >
+          Title
+        </button>
+      </div>
       <ul>
-        {searchResults.map((product) => (
+        {sortedSearchResults.map((product) => (
           <li key={product._id} className='list'>
             <strong className='title'>{product.title}</strong>
             <br /> {product.description}

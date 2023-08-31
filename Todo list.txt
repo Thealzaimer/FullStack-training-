@@ -4,9 +4,8 @@ form (image get by upload)
 modificationDate (check)
 search bar(title,description) (check)
 filter(by price less than 100 | 100 and 500 | more than 500) (check)
-sort(by creationDate , title or modificationDate ) 
+sort(by creationDate , title or modificationDate ) (check)
 Swagger
-auth
 
 
 
