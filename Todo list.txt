@@ -7,12 +7,9 @@ filter(by price less than 100 | 100 and 500 | more than 500) (check)
 sort(by creationDate , title or modificationDate ) (check)
 Swagger
 
-
-
 modificationDate
 pagination 1
 pagination 4 1
 pagination 4 2
 pagination 5
 pagination 8
-Swagger

@@ -102,7 +102,7 @@ function List() {
 
   return (
     <div className='container'>
-      <h2 className='title1'>Product List</h2>
+      <h2 className='product-title'>Product List</h2>
       <SearchBar searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
       <div>
         <label>
@@ -116,7 +116,7 @@ function List() {
         </label>
       </div>
       <div>
-        <h2 className="sort-header">Sort By:</h2>
+        <h2 className="sort-title">Sort By:</h2>
         <button
           className={`sort-button ${sortCriteria === 'creationDate' && 'active'}`}
           onClick={() => handleSortChange('creationDate')}

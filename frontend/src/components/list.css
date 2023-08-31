@@ -6,7 +6,7 @@
 button{
     margin-bottom: 25px;
 }
-.title1{
+.product-title{
     color: white;
 }
 .price{
@@ -15,13 +15,9 @@ button{
 .list{
     color: white;
 }
-/* .pagination{
-    margin-right:81%; 
+.sort-title{
+    color:white;
+}
+.pagination{
     color: white;
-} */
-/* li{
-    margin-left:45%;
-} */
-/* .pagination a{
-    text-decoration: none;
-} */
+}
